@@ -36,10 +36,27 @@ const animalSchema = new Schema ({
 // make animal model
 const Animal = model("Animals", animalSchema)
 
+// Middleware
+app.use(morgan("tiny"))
 
 // Routes
 app.get("/", (req, res) => {
     res.send(`server is running`)
+})
+
+app.get("/animals/seed", (req, res) => {
+    const startAnimals = [
+        {species: "Tiger", extinct: false, location: "Asia", lifeExpectancy: 15},
+        {species: "Bonobo", extinct: false, location: "America", lifeExpectancy: 12},
+        {species: "Green Sea Turtle", extinct: false, location: "Ocean", lifeExpectancy: 8},
+        {species: "Tasmanian Tiger", extinct: true, location: "Tasmania", lifeExpectancy: 0},
+        {species: "Saola", extinct: true, location: "Somewhere", lifeExpectancy: 0}
+    ]
+    Animal.deleteMany({}, (err, data) => {
+        Animal.create(startAnimals, (err, createdAnimals) => {
+            res.json(createdAnimals);
+        })
+    })
 })
 app.listen(PORT, () => {
     console.log(`server is listening on port ${PORT}`)
