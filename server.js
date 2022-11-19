@@ -38,6 +38,7 @@ const Animal = model("Animals", animalSchema)
 
 // Middleware
 app.use(morgan("tiny"))
+app.use(express.static("public"))
 
 // Routes
 app.get("/", (req, res) => {
@@ -61,7 +62,10 @@ app.get("/animals/seed", (req, res) => {
 
 // Index Route
 app.get("/animals", (req, res) => {
-    res.send(`working!`)
+    Animal.find({})
+    .then((animals) => {
+        res.render("animals/index.ejs", {animals})
+    })
 })
 
 app.listen(PORT, () => {
