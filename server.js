@@ -68,6 +68,11 @@ app.get("/animals", (req, res) => {
     })
 })
 
+// New Route
+app.get("/animals/new", (req, res) => {
+    res.render("animals/new.ejs")
+})
+
 // Show Route
 app.get("/animals/:id", (req, res) => {
     id = req.params.id
