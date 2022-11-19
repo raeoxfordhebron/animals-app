@@ -58,6 +58,12 @@ app.get("/animals/seed", (req, res) => {
         })
     })
 })
+
+// Index Route
+app.get("/animals", (req, res) => {
+    res.send(`working!`)
+})
+
 app.listen(PORT, () => {
     console.log(`server is listening on port ${PORT}`)
 })
