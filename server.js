@@ -39,6 +39,7 @@ const Animal = model("Animals", animalSchema)
 // Middleware
 app.use(morgan("tiny"))
 app.use(express.static("public"))
+app.use(express.urlencoded({extended: true}))
 
 // Routes
 app.get("/", (req, res) => {
@@ -71,6 +72,15 @@ app.get("/animals", (req, res) => {
 // New Route
 app.get("/animals/new", (req, res) => {
     res.render("animals/new.ejs")
+})
+
+// Create Route
+app.post("/animals", (req, res) => {
+    console.log(req.body)
+    req.body.extinct = req.body.extinct === "on" ? true : false
+    Animal.create(req.body, (err, animal) => {
+        res.redirect("/animals")
+    })
 })
 
 // Show Route
