@@ -68,6 +68,14 @@ app.get("/animals", (req, res) => {
     })
 })
 
+// Show Route
+app.get("/animals/:id", (req, res) => {
+    id = req.params.id
+    Animal.findById(id, (err, animal) => {
+        res.render("animals/show.ejs", {animal})
+    })
+})
+
 app.listen(PORT, () => {
     console.log(`server is listening on port ${PORT}`)
 })
