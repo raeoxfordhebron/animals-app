@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const methodOverride = require('method-override')
 const morgan = require('morgan')
 const PORT = process.env.PORT
+const bcrypt = require('bcryptjs')
 
 const app = express()
 
@@ -41,6 +42,7 @@ app.use(morgan("tiny"))
 app.use(express.static("public"))
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride("_method"))
+
 
 // Routes
 app.get("/", (req, res) => {

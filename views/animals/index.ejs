@@ -9,8 +9,11 @@
                     <a href="/animals/new"><button>Create a New Animal</button></a>
                     <% for (animal of animals) { %>
                         <article>
-                            <a href="/animals/<%= animal._id %>">
-                                <h2>
+                                <h2
+                                hx-get="/animals/<%= animal._id %>"
+                                hx-trigger="click"
+                                hx-target="div"
+                                hx-swap="innerHTML">
                                     <%= animal.species %>
                                 </h2>
                             </a>
