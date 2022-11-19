@@ -23,6 +23,24 @@ mongoose.connection
 .on("open", () => console.log("Connected to Mongoose"))
 .on("close", () => console.log("Disconnected from Mongoose"))
 
+// Animals Models
+const {Schema, model} = mongoose
+
+const animalSchema = new Schema ({
+    species: String,
+    extinct: Boolean,
+    location: String,
+    lifeExpectancy: Number,
+})
+
+// make animal model
+const Animal = model("Animals", animalSchema)
+
+
+// Routes
+app.get("/", (req, res) => {
+    res.send(`server is running`)
+})
 app.listen(PORT, () => {
     console.log(`server is listening on port ${PORT}`)
 })
